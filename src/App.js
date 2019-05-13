@@ -92,7 +92,7 @@ class App extends React.Component {
 
   async updateTodo() {
     const todo = this.state.todos[this.state.editingIndex]
-    
+
     this.setState({
       loading: true
     })          
@@ -139,7 +139,7 @@ class App extends React.Component {
               {this.state.notification}                       
             </div>
           }
-
+          
           <input 
             type="text" 
             name="todo"
@@ -148,18 +148,21 @@ class App extends React.Component {
             onChange={this.handleChange}
             value={this.state.newTodo}
           />
-
+          
           <button             
-            onClick={this.state.editing ? this.updateTodo : this.addTodo}
-            className="btn-success form-control mb-4"
+            onClick={this.state.editing ? this.updateTodo : this.addTodo}            
+            className={
+              `form-control mb-4 
+              ${this.state.newTodo.length > 4 && 'btn-success'}`
+            } 
             disabled={this.state.newTodo.length < 5}
           >
             {this.state.editing ? 'Update todo' : 'Add todo'}
-          </button>
+          </button>            
 
           {
             this.state.loading &&
-            <img src={loadingGif} alt="" />
+            <img src={loadingGif} alt="loading" />
           }          
 
           {            
@@ -181,7 +184,11 @@ class App extends React.Component {
               })}
 
             </ul> 
-          }     
+          } 
+
+          <div className="text-right ">
+            <code>U = Update | X = Delete</code>            
+          </div>    
 
         </div>
       </div>      
